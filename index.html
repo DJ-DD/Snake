@@ -13,14 +13,19 @@
 		<script>
 			$(function(){
 				var snakegame = new Snake();
-				
-				startImg.onload = function(){
-					snakegame.init();
-				};
-				
-				$("#gameview").click(function(){
+				//1-1-为canvas加载游戏开始画面，当startImg被加载后执行init方法
+//				startImg.onload = function(){
+//					snakegame.init();
+//				};
+//				
+//				$("#gameview").click(function(){
+//					snakegame.start();
+//				});
+
+				//1-1'直接进入游戏界面
+				bgImg.onload = function(){
 					snakegame.start();
-				});
+				};
 			});
 		</script>
 	</body>
