@@ -27,6 +27,8 @@ function Snake(){
 	this.stepY = Math.floor(this.height/this.step); //Y轴的步数
 	this.snakeBodyList = [];  //设置蛇身数组
 	this.foodList = [];  //设置食物数组
+	this.timer = null;  //蛇动时的定时器
+	this.score = 0; //分数 +10 存入到localStorage中
 	/*
 	 *1-生成初始化页面，点击该页面进入游戏
 	 * */
@@ -34,33 +36,44 @@ function Snake(){
 		this.ctx.drawImage(startImg, 0, 0, this.width, this.height);
 	}
 	/*
-	 *2-游戏开始，绘制背景、蛇、食物
-	 * */
+	 * 2-游戏开始，绘制背景、蛇、食物,蛇移动
+	 */
+	
 	this.start = function(){
+		this.paint();
+		this.move();
+	}
+	/*
+	 * 绘制背景、蛇、食物
+	 */
+	this.paint = function() {
 		//2.1 画出背景
 		this.ctx.drawImage(bgImg, 0, 0, this.width, this.height);
 		//2.2 画蛇
 		this.drawSnake();
-		//2.3随机画出食物
+		//2.3 随机画出食物
 		this.drawFood();
 	}
+	
 	/*
 	 *2.2画蛇--算法：[{x:横坐标，y:纵坐标，img:图片，direct：运动方向，......}]
 	 * */
 	this.drawSnake = function(){
 		//2.2.1循环生成snakeBodyList数组中的对象集合（默认，蛇居于中间，舌头向西）
-		for(var i=0;i<5;i++){
-			//{x:横坐标，y:纵坐标，img:图片，direct：运动方向，......}蛇的节点设计
-			this.snakeBodyList.push({
-				x:Math.floor(this.stepX/2)+i-2,  //注意：x不是px像素坐标点，而是x轴步数
-				y:Math.floor(this.stepY/2),   //注意：y不是px像素坐标点，而是y轴步数
-				img:bodyImg,
-				direct:"west"
-			});
+		if(this.snakeBodyList.length<5){
+			for(var i=0;i<5;i++){
+				//{x:横坐标，y:纵坐标，img:图片，direct：运动方向，......}蛇的节点设计
+				this.snakeBodyList.push({
+					x:Math.floor(this.stepX/2)+i-2,  //注意：x不是px像素坐标点，而是x轴步数
+					y:Math.floor(this.stepY/2),   //注意：y不是px像素坐标点，而是y轴步数
+					img:bodyImg,
+					direct:"west"
+				});
+			}
+	//		console.log(this.snakeBodyList);
+			//2.2.2替换snakeBodyList数组第一个元素的img，替换成westImg蛇头图片
+			this.snakeBodyList[0].img = westImg;
 		}
-//		console.log(this.snakeBodyList);
-		//2.2.2替换snakeBodyList数组第一个元素的img，替换成westImg蛇头图片
-		this.snakeBodyList[0].img = westImg;
 		//2.2.3遍历snakeBodyList数组，并画出蛇的初始状态
 		for(var i = 0;i<this.snakeBodyList.length;i++){
 			var sNode = this.snakeBodyList[i];
@@ -104,11 +117,64 @@ function Snake(){
 		
 	}
 	/*
-	 *3-蛇动
-	 * */
-	this.move = function(){}
+	 *3-蛇动（键盘事件改变蛇移动方向，判断蛇是否死掉，然后判断蛇是否吃了食物，然后蛇移动）
+	 */
+	this.move = function(){
+		var _this = this;//解决办法：定义变量保存
+		document.onkeydown = function(event){
+			var event = event || window.event;
+			console.log(event.key+"："+event.keyCode);
+			console.log(_this.snakeBodyList); //打印不出来--事件处理是异步的，所以无法传递this对象
+			switch(event.keyCode){
+				case 37:  //向左
+					_this.snakeBodyList[0].img = westImg;
+					_this.snakeBodyList[0].direct = "west";
+				break;
+				case 38:  //向上
+					_this.snakeBodyList[0].img = northImg;
+					_this.snakeBodyList[0].direct = "north";
+				break;
+				case 39:  //向右
+					_this.snakeBodyList[0].img = eastImg;
+					_this.snakeBodyList[0].direct = "east";
+				break;
+				case 40:  //向下
+					_this.snakeBodyList[0].img = southImg;
+					_this.snakeBodyList[0].direct = "south";
+				break;
+			}
+		}
+		
+		//运动定时器，每隔0.2s移动蛇（蛇的坐标变化，然后重绘）
+		this.timer = setInterval(function(){   //先注释，怕0.2s一执行，好测试
+			//蛇头的坐标变化，并且蛇身跟随，移动
+			//首先，解决蛇身跟随的问题
+			for(var i = _this.snakeBodyList.length-1;i>0;i--){ //定时器也是异步，所以_this
+				_this.snakeBodyList[i].x = _this.snakeBodyList[i-1].x;
+				_this.snakeBodyList[i].y = _this.snakeBodyList[i-1].y;
+			};
+			//其次，根据方向及坐标，处理蛇头的移动新坐标
+			var shead = _this.snakeBodyList[0];
+			switch(shead.direct){
+				case 'north':
+					shead.y--;
+				break;
+				case 'south':
+					shead.y++;
+				break;
+				case 'west':
+					shead.x--;
+				break;
+				case 'east':
+					shead.x++;
+				break;
+			}
+			_this.paint();  //蛇每移动一次重绘游戏画面
+		},1000);
+		
+	}
 	/*
-	 *3-蛇死
+	 *4-蛇死（碰到边界或自身--dead 弹出得分界面）
 	 * */
 	this.dead = function(){}
 }
