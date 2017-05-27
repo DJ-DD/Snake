@@ -70,7 +70,39 @@ function Snake(){
 	/*
 	 *2.3画食物
 	 * */
-	this.drawFood = function(){}
+	this.drawFood = function(){
+		
+		//2.3.1当食物已经存在的时候，画面刷新时食物在原有位置重绘
+		if(this.foodList.length>0){  //长度大于0就有食物
+			var fnode = this.foodList[0];  //重绘
+			this.ctx.drawImage(fnode.img, fnode.x*this.step, fnode.y*this.step, this.step, this.step);
+			return;
+		}
+		//2.3.2如果食物没有（食物被吃或游戏初始化），生成x,y随机坐标，判断是否与蛇神重复
+		//如果重复，重绘，调drawfood（），否则，按照随机生成的点push到数组中，绘制图案
+			var foodX = Math.floor(Math.random()*this.stepX);
+			var foodY = Math.floor(Math.random()*this.stepY);
+			var foodFlag = false;  //判断食物与蛇身是否重复的标识位，true重复，false不重复
+			for(var i=0;i<this.snakeBodyList.length;i++){
+				var snode1 = this.snakeBodyList[i];
+				if(foodX == snode1.x && foodY == snode1.y){
+					foodFlag = true;
+				}
+			}
+			if(foodFlag){
+				this.drawFood();  //如果重复，则重绘
+			}else{
+				this.foodList.push({
+					x:foodX,
+					y:foodY,
+					img:foodImg
+				});   //否则，新生成一个食物
+				console.log(this.foodList);
+				var fnode = this.foodList[0];
+				this.ctx.drawImage(fnode.img, fnode.x*this.step, fnode.y*this.step, this.step, this.step);
+			}
+		
+	}
 	/*
 	 *3-蛇动
 	 * */
