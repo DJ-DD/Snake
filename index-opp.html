@@ -9,18 +9,22 @@
 		<canvas id="gameview" width="500" height="500"></canvas>
 		
 		<script src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/snake.js"></script>
 		<script>
 			$(function(){
-				var snakegame = new Snake();
+				var ctx = $("#gameview")[0].getContext("2d")
 				
-				startImg.onload = function(){
-					snakegame.init();
+				var bgImage = new Image();
+				bgImage.src = "img/background.png";
+				
+				var startImage = new Image();
+				startImage.src = "img/start.png";
+				startImage.onload = function(){//cancas图片显示  起始位置、宽度、高度
+					ctx.drawImage(startImage,0,0,500,500);
 				};
-				
 				$("#gameview").click(function(){
-					snakegame.start();
+					ctx.drawImage(bgImage,0,0,500,500);
 				});
+				
 			});
 		</script>
 	</body>
