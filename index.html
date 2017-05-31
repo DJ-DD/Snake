@@ -2,7 +2,14 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no" />
 		<title>响应式贪吃蛇1701</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
 	</head>
 	<body>
 		<h3 id="title">开始游戏</h3>
@@ -14,13 +21,13 @@
 			$(function(){
 				var snakegame = new Snake();
 				//1-1-为canvas加载游戏开始画面，当startImg被加载后执行init方法
-//				startImg.onload = function(){
-//					snakegame.init();
-//				};
-//				
-//				$("#gameview").click(function(){
-//					snakegame.start();
-//				});
+				startImg.onload = function(){
+					snakegame.init();
+				};
+				
+				$("#gameview").click(function(){
+					snakegame.start();
+				});
 
 				//1-1'直接进入游戏界面
 				bgImg.onload = function(){

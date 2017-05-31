@@ -31,20 +31,44 @@ function Snake(){
 	this.score = 0; //分数 +10 存入到localStorage中
 	this.isDead = false; //蛇是否活着标识位
 	this.isEaten = false;  //食物是否被吃掉标识位
+	this.isPhone = false;  //判断设备是否为移动端 true--移动端  false--PC端
 	/*
 	 *1-生成初始化页面，点击该页面进入游戏
 	 * */
 	this.init = function(){
+		this.device();//判断设备类型
 		this.ctx.drawImage(startImg, 0, 0, this.width, this.height);
 	}
 	/*
 	 * 2-游戏开始，绘制背景、蛇、食物,蛇移动
 	 */
-	
 	this.start = function(){
+		this.device();//判断设备类型
+		this.score = 0; //积分清零
 		this.paint();
 		this.move();
 	}
+	
+	/*
+	 * 判断当前设备是否是移动端
+	 */
+	this.device = function(){
+		//1-读取BOM对象navigator的userAgent信息
+		var deviceInfo = navigator.userAgent;
+		//2-判断是否为PC端（是否含有Windows字符串）
+		if(deviceInfo.indexOf("Windows") == -1){
+			this.isPhone = true;
+			this.canvas.width = window.innerWidth;
+			this.canvas.height = window.innerHeight;
+			this.width = window.innerWidth;
+			this.height = window.innerHeight;
+			this.stepX = this.width/this.step;
+			this.stepY = this.height/this.step;
+			console.log(this.width+" "+this.height);
+		}
+		
+	}
+	
 	/*
 	 * 绘制背景、蛇、食物
 	 */
@@ -112,7 +136,7 @@ function Snake(){
 					y:foodY,
 					img:foodImg
 				});   //否则，新生成一个食物
-				console.log(this.foodList);
+//				console.log(this.foodList);
 				var fnode = this.foodList[0];
 				this.ctx.drawImage(fnode.img, fnode.x*this.step, fnode.y*this.step, this.step, this.step);
 			}
@@ -125,8 +149,8 @@ function Snake(){
 		var _this = this;//解决办法：定义变量保存
 		document.onkeydown = function(event){
 			var event = event || window.event;
-			console.log(event.key+"："+event.keyCode);
-			console.log(_this.snakeBodyList); //打印不出来--事件处理是异步的，所以无法传递this对象
+//			console.log(event.key+"："+event.keyCode);
+//			console.log(_this.snakeBodyList); //打印不出来--事件处理是异步的，所以无法传递this对象
 			switch(event.keyCode){
 				case 37:  //向左
 					_this.snakeBodyList[0].img = westImg;
@@ -175,7 +199,7 @@ function Snake(){
 			_this.dead();  //判断蛇生死
 			if(_this.isDead){
 				//alert你的最终分数
-				alert("Your score is:"+_this.score);
+				console.log("Your score is:"+_this.score);
 				//可将下面四行新建个方法restart，添加命令按钮控制重新开始
 				clearInterval(_this.timer); //如果不清楚定时器，则速度会不断加快
 				_this.isDead = false; //改变isDead状态，否则，每次开始直接死掉
