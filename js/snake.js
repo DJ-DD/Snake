@@ -13,13 +13,13 @@ const foodImg = new Image();
 foodImg.src = "img/food.png";
 const bgImg = new Image();
 bgImg.src = "img/background.png";
-//将欢迎界面的图片放在最后，表示会后加载成功
+//将欢迎界面的图片放在最后，表示会后加载成功后，其他图片已经加载完毕，无需再进行onload判断
 const startImg = new Image();
 startImg.src = "img/start.png";
 
 function Snake(){
 	this.canvas = $("#gameview")[0];  //canvas对象
-	this.ctx = this.canvas.getContext("2d")  //画笔
+	this.ctx = this.canvas.getContext("2d");  //画笔
 	this.width = 500;  //背景（游戏屏幕）的宽度
 	this.height = 500;  //背景（游戏屏幕）的高度
 	this.step = 25;  //设计步长
@@ -29,6 +29,8 @@ function Snake(){
 	this.foodList = [];  //设置食物数组
 	this.timer = null;  //蛇动时的定时器
 	this.score = 0; //分数 +10 存入到localStorage中
+	this.isDead = false; //蛇是否活着标识位
+	this.isEaten = false;  //食物是否被吃掉标识位
 	/*
 	 *1-生成初始化页面，点击该页面进入游戏
 	 * */
@@ -59,7 +61,7 @@ function Snake(){
 	 *2.2画蛇--算法：[{x:横坐标，y:纵坐标，img:图片，direct：运动方向，......}]
 	 * */
 	this.drawSnake = function(){
-		//2.2.1循环生成snakeBodyList数组中的对象集合（默认，蛇居于中间，舌头向西）
+		//2.2.1循环生成snakeBodyList数组中的对象集合（默认，蛇居于中间，蛇头向西）
 		if(this.snakeBodyList.length<5){
 			for(var i=0;i<5;i++){
 				//{x:横坐标，y:纵坐标，img:图片，direct：运动方向，......}蛇的节点设计
@@ -145,7 +147,7 @@ function Snake(){
 			}
 		}
 		
-		//运动定时器，每隔0.2s移动蛇（蛇的坐标变化，然后重绘）
+		//3.1运动定时器，每隔0.2s移动蛇（蛇的坐标变化，然后重绘）
 		this.timer = setInterval(function(){   //先注释，怕0.2s一执行，好测试
 			//蛇头的坐标变化，并且蛇身跟随，移动
 			//首先，解决蛇身跟随的问题
@@ -169,12 +171,79 @@ function Snake(){
 					shead.x++;
 				break;
 			}
-			_this.paint();  //蛇每移动一次重绘游戏画面
-		},1000);
+			//3.1.1 判断蛇移动之后新位置是否已经触边界，或触自身 true-dead（每移动一次都需判断，判断后重绘）
+			_this.dead();  //判断蛇生死
+			if(_this.isDead){
+				//alert你的最终分数
+				alert("Your score is:"+_this.score);
+				//可将下面四行新建个方法restart，添加命令按钮控制重新开始
+				clearInterval(_this.timer); //如果不清楚定时器，则速度会不断加快
+				_this.isDead = false; //改变isDead状态，否则，每次开始直接死掉
+				_this.snakeBodyList = [];  //清除蛇身，便于重新开始游戏，重绘初始页面
+				_this.start(); //游戏重新开始
+			}else{
+				//3.1.2 false：蛇活着，判断蛇头是否与食物的坐标点一致，如果一致，清空食物数组；多个食物时可以使用标识位
+				_this.eat();  //判断食物是否被吃
+				if(_this.isEaten){
+					//清空食物数组
+					//console.log("Eaten");
+					_this.isEaten = false;
+					//清空食物数组  
+					_this.foodList = [];  //等于空数组相当于不要原来的空间，指向一个新的地址，产生垃圾
+					//_this.foodList[0] = null; //drawFood的判断条件与该语句冲突
+					//加分
+					_this.score += 10;
+					//蛇身长一节
+					var lastNodeIndex = _this.snakeBodyList.length;
+					_this.snakeBodyList[lastNodeIndex] = {
+						x:-2,
+						y:-2,
+						img:bodyImg,
+						direct:_this.snakeBodyList[lastNodeIndex-1].direct
+					};
+				}
+			//3.1.3 否则重绘
+			_this.paint();  //蛇每移动一次重绘游戏画面（若背景不重绘，原来已经绘制的点仍在，社会不断延长）
+			}
+		},200);
 		
 	}
 	/*
 	 *4-蛇死（碰到边界或自身--dead 弹出得分界面）
 	 * */
-	this.dead = function(){}
+	this.dead = function(){
+//		this.isDead = true;  //测试3.1.1，游戏一开始就死掉，可以弹框，测试逻辑
+		const LEFT_END = 0; //左边界
+		const RIGHT_END = this.stepX; //右边界
+		const NORTH_END = 0; //上边界
+		const SOUTH_END = this.stepY; //下边界
+		const headX = this.snakeBodyList[0].x;  //蛇头横坐标x
+		const headY = this.snakeBodyList[0].y;  //蛇头纵坐标y
+		//判断边界
+		if(headX < LEFT_END-1 || headY < NORTH_END-1 || headX > RIGHT_END || headY > SOUTH_END){
+			this.isDead = true;
+			return; //精简判断过程
+		}
+		
+		//判断是否撞到自身
+		for(var k = this.snakeBodyList.length-1; k>0; k--){
+			if(this.snakeBodyList[k].x == headX && this.snakeBodyList[k].y == headY){
+				this.isDead = true;
+			}
+		}
+		
+	}
+	/*
+	 * 5-蛇吃食物（蛇头坐标与食物坐标一致）
+	 */
+	this.eat = function(){
+//		this.isEaten = true;
+		const HEAD_X = this.snakeBodyList[0].x;  //蛇头横坐标x
+		const HEAD_Y = this.snakeBodyList[0].y;  //蛇头纵坐标y
+		const FOOD_X = this.foodList[0].x;  //食物横坐标x
+		const FOOD_Y = this.foodList[0].y;  //食物纵坐标y
+		if(HEAD_X == FOOD_X && HEAD_Y == FOOD_Y){
+			this.isEaten = true;
+		}
+	}
 }
