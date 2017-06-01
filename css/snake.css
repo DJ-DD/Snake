@@ -61,19 +61,36 @@
 	    cursor: pointer;
 }
 	
-#myul li{
+#myul1 li{
 	list-style: none;
 	float: left;
 	cursor: pointer;
 }
 
-#myul li img{
+#myul1 li img{
 	width:120px;
 	height:60px;
-	opacity: 0.5;
+	opacity: 0.3;
 }
 
-#myul li img:hover{
+#myul1 li img:hover{
+	opacity: 1;
+}
+
+#myul2 li{
+	list-style: none;
+	float: left;
+	cursor: pointer;
+	margin-right:20px;
+}
+
+#myul2 li img{
+	width:40px;
+	height:40px;
+	opacity: 0.3;
+}
+
+#myul2 li img:hover{
 	opacity: 1;
 }
 
@@ -87,7 +104,7 @@
 	text-align: center;
 	line-height: 30px;
 	cursor: pointer;
-	opacity: 0.8;
+	opacity: 0.3;
 }
 
 #level li:hover{
@@ -153,11 +170,15 @@
 }
 
 #speed{
-	margin:40px 0px 20px 110px;
+	margin:22px 0px 20px 110px;
 }
 #bgImg{
 	margin-left: 110px;
-	margin-top: 30px;
+	margin-top: 15px;
+}
+#bodyImg{
+	margin-left: 110px;
+	margin-top: 45px;
 }
 #setPara span{
 	display: block;
@@ -192,4 +213,218 @@
 	font-size:22px ;
 	margin-left: 180px;
 	cursor: pointer;
+}
+#chongzhi{
+	position:absolute;
+	top:212px;
+	left:25px;
+}
+@media screen and (max-width: 414px) {
+   #all{
+	width: 414px;
+}
+
+#music{
+	width:50px;
+	height:50px;
+	position: absolute;
+	top:682px;
+	left:0px;
+	border-radius: 15px;
+}
+
+#set{
+	width:50px;
+	height:50px;
+	position: absolute;
+	    top: 682px;
+    left: 348px;
+}
+
+#youxi{
+	position: absolute;
+	top:425px;
+	left:387px;
+	display: none;
+}
+
+#intro{
+	position: absolute;
+	top:740px;
+	left:0px;
+}
+
+#setPara{
+	width: 405px;
+    height: 438px;
+    background: rgba(0,0,0,0.9);
+    position: absolute;
+    top: 37px;
+    left: 3px;
+    display: none;
+    color: white;
+}
+
+.close{
+	    position: absolute;
+	    top: 15px;
+	    right: 35px;
+	    color: #f1f1f1;
+	    font-size: 40px;
+	    font-weight: bold;
+	    transition: 0.3s;
+	    cursor: pointer;
+}
+	
+#myul1 li{
+	list-style: none;
+	float: left;
+	cursor: pointer;
+}
+
+#myul1 li img{
+	width:120px;
+	height:60px;
+	opacity: 0.5;
+}
+
+#myul1 li img:hover{
+	opacity: 1;
+}
+
+#myul2 li{
+	list-style: none;
+	float: left;
+	cursor: pointer;
+	margin-right:20px;
+}
+
+#myul2 li img{
+	width:40px;
+	height:40px;
+	opacity: 0.5;
+}
+
+#myul2 li img:hover{
+	opacity: 1;
+}
+
+#level li{
+	list-style: none;
+	float:left;
+	width:100px;
+	height:30px;
+	background: indianred;
+	margin-right:10px;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+#level li:hover{
+	opacity: 1;
+}
+
+#phb{
+	position: absolute;
+	top:0px;
+	left:270px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+#PH-all{
+	width:200px;
+	height:418px;
+	background: red;
+	position: absolute;
+	    top: 91px;
+    left: 103px
+}
+
+#fenshu{
+	width:151px;
+	height:53px;
+	position: absolute;
+	top:0px;
+	left:0px;
+	background: blue;
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 53px;
+}
+
+#ming{
+	width:151px;
+	height:53px;
+	position: absolute;
+	top:60px;
+	left:0px;
+	background: blue;
+	line-height: 53px;
+	text-align: center;
+}
+
+#save{
+	position: absolute;
+	top:120px;
+	left:0px;
+}
+
+#paihang{
+	position: absolute;
+	top:180px;
+	left:0px;
+}
+.paihang{
+	position: absolute;
+	top: 203px;
+	left: atuo;
+}
+
+#speed{
+	margin:40px 0px 20px 110px;
+}
+#bgImg{
+	margin-left: 110px;
+	margin-top: 30px;
+}
+#setPara span{
+	    display: block;
+    margin-bottom: 18px;
+    margin-left: -74px;
+}
+
+#PH-all{
+	background-color: indianred;
+	background-position: 220px -20px;
+	display: none;
+}
+#fenshu{
+	background-color: papayawhip;
+	margin-left:25px ;
+}
+#ming
+{
+	background-color: papayawhip;
+	margin-left:25px ;
+}
+#save
+{
+	background-color: papayawhip;
+	margin-left:25px ;
+	margin-top: 30px;
+}
+#paihang{
+	background-color: papayawhip;
+	margin-left:25px ;
+
+}
+#xxx{
+	font-size:22px ;
+	margin-left: 180px;
+	cursor: pointer;
+}
 }

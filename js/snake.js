@@ -9,7 +9,7 @@ eastImg.src = "img/east1.png";
 const westImg = new Image();
 westImg.src = "img/west1.png";
 const bodyImg = new Image();
-bodyImg.src = "img/body.png";
+bodyImg.src = "img/body1.png";
 const foodImg = new Image();
 foodImg.src = "img/food.png";
 const  foodImg2=new Image();
@@ -23,8 +23,17 @@ var  k=parseInt(Math.random()*3); //设置0/1/2随机数，随机产生食物
 const startImg = new Image();
 startImg.src = "img/start.png";
 
-$("#myul").on("click","li",function(){
+$("#myul1").on("click","li",function(){
 	bgImg.src = "img/background"+($(this).index()+1)+".png";
+	
+});
+
+$("#myul2").on("click","li",function(){
+	bodyImg.src = "img/body"+($(this).index()+1)+".png";
+	northImg.src = "img/north"+($(this).index()+1)+".png";
+	southImg.src = "img/south"+($(this).index()+1)+".png";
+	eastImg.src = "img/east"+($(this).index()+1)+".png";
+	westImg.src = "img/west"+($(this).index()+1)+".png";
 	
 });
 
@@ -71,6 +80,15 @@ function Snake(){
 	    localStorage.setItem(sitename, siteurl);
 	    	alert("添加成功");
 	});
+	
+	//充值
+	$("#chongzhi").click(function(){
+    	var money=prompt("请输入金额");
+    	var sitmoney=money;
+    	var xiaoming="小明"
+    	localStorage.setItem(xiaoming, sitmoney);
+        alert("充值成功");
+    })
 	
 	//查找
 	 $("#paihang").click( function loadAll(){  

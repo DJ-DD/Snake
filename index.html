@@ -26,11 +26,20 @@
 				<br />
 				<div id="bgImg">
 					<span>游戏背景</span>
-					<ul id="myul">
+					<ul id="myul1">
 						<li><img src="img/background1.png" alt="" /></li>
 						<li><img src="img/background2.png" alt="" /></li>
 						<li><img src="img/background3.png" alt="" /></li>
 						<li><img src="img/background4.png" alt="" /></li>
+					</ul>
+				</div>
+				<br />
+				<br />
+				<div id="bodyImg">
+					<span>蛇蛇皮肤</span>
+					<ul id="myul2">
+						<li><img src="img/north1.png" alt="" /></li>
+						<li><img src="img/north2.png" alt="" /></li>
 					</ul>
 				</div>
 				<span class="close">×</span>
@@ -44,6 +53,7 @@
 				<button id="save">保存</button>
 				<button id="paihang">历史记录</button>
 				<div class="paihang"></div>
+				<button id="chongzhi">充值</button>
 			</div>
 			<div id="intro">
 				<p style="font-weight: bold;">操作指南</p>
@@ -102,10 +112,15 @@
 	 				$("#setPara").css("display","none");
 	 			});
 	 			
-	 			$("#myul img").click(function(){
-	 				$("#myul img").css("border","");
-	 				$("#myul img").css("opacity","");
+	 			$("#myul1 img").click(function(){
+	 				$("#myul1 img").css("border","");
+	 				$("#myul1 img").css("opacity","");
 	 				$(this).css("border","solid 2px indianred");
+	 				$(this).css("opacity","1");
+	 			});
+	 			
+	 			$("#myul2 img").click(function(){
+	 				$("#myul2 img").css("opacity","");
 	 				$(this).css("opacity","1");
 	 			});
 	 			
