@@ -10,14 +10,6 @@
 	margin-top:10px;
 }
 
-#start{
-	position: absolute;
-	top:315px;
-	left:339px;
-	width:207px;
-	height:66px;
-}
-
 #music{
 	width:50px;
 	height:50px;
@@ -41,10 +33,16 @@
 	left:387px;
 }
 
+#intro{
+	position: absolute;
+	top:425px;
+	left:0px;
+}
+
 #setPara{
 	width:700px;
 	height:350px;
-	background: rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.9);
 	position: absolute;
 	top:37px;
 	left:94px;
@@ -69,22 +67,39 @@
 	cursor: pointer;
 }
 
+#myul li img{
+	width:120px;
+	height:60px;
+	opacity: 0.5;
+}
+
+#myul li img:hover{
+	opacity: 1;
+}
+
 #level li{
 	list-style: none;
 	float:left;
 	width:100px;
 	height:30px;
-	background: red;
+	background: indianred;
 	margin-right:10px;
 	text-align: center;
 	line-height: 30px;
 	cursor: pointer;
+	opacity: 0.8;
+}
+
+#level li:hover{
+	opacity: 1;
 }
 
 #phb{
 	position: absolute;
 	top:0px;
-	left:0px;
+	left:756px;
+	cursor: pointer;
+	border-radius: 10px;
 }
 
 #PH-all{
@@ -130,4 +145,51 @@
 	position: absolute;
 	top:180px;
 	left:0px;
+}
+.paihang{
+	position: absolute;
+	top: 203px;
+	left: atuo;
+}
+
+#speed{
+	margin:40px 0px 20px 110px;
+}
+#bgImg{
+	margin-left: 110px;
+	margin-top: 30px;
+}
+#setPara span{
+	display: block;
+	margin-bottom: 10px;
+}
+#PH-all{
+	background-color: indianred;
+	background-position: 220px -20px;
+	display: none;
+}
+#fenshu{
+	background-color: papayawhip;
+	margin-left:25px ;
+}
+#ming
+{
+	background-color: papayawhip;
+	margin-left:25px ;
+}
+#save
+{
+	background-color: papayawhip;
+	margin-left:25px ;
+	margin-top: 30px;
+}
+#paihang{
+	background-color: papayawhip;
+	margin-left:25px ;
+
+}
+#xxx{
+	font-size:22px ;
+	margin-left: 180px;
+	cursor: pointer;
 }
