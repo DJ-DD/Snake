@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no" />
+		<title>响应式贪吃蛇1701</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			#all{
+				position: relative;
+			}
+			#start{
+				position: absolute;
+				top:315px;
+				left:351px;
+				width:196px;
+				height: 66px;
+			}
+			#intro{
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="all">
+			<canvas id="gameview" width="893" height="418"></canvas>
+			<img src="img/start.jpg" alt="" id="start" />
+			<div id="intro">
+				<p>操作指南</p>
+				<div>
+					<img src="img/caozuo.png" alt="control" />控制移动
+					<img src="img/pause.png" alt="pause" />暂停
+				</div>
+				<p>游戏使用方向键控制，按P暂停</p>
+			</div>
+		</div>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/snake.js"></script>
+		<script>
+			$(function(){
+				var snakegame = new Snake();
+				//1-为canvas加载游戏开始画面，当startImg被加载后执行init方法
+				startImg.onload = function(){
+					snakegame.init();
+				};
+				
+				//2-点击开始界面，游戏开始
+				$("#start").click(function(){
+					snakegame.start();
+					$("#start").hide();
+				});
+
+				//1-1'直接进入游戏界面
+//				bgImg.onload = function(){
+//					snakegame.start();
+//				};
+			});
+		</script>
+	</body>
+</html>
