@@ -16,6 +16,13 @@ const bgImg = new Image();
 bgImg.src = "img/background.png";
 //将欢迎界面的图片放在最后，表示会后加载成功后，其他图片已经加载完毕，无需再进行onload判断
 const startImg = new Image();
+const  bgImg2=new Image();
+bgImg2.src="img/apple.png"
+const  bgImg3=new Image();
+bgImg3.src="img/cactus.png"
+//设置1/2/3随机数，随机产生食物
+var  k=parseInt(Math.random()*3);
+
 startImg.src = "img/start.png";
 
 //创建snake类，定义其属性和方法
@@ -116,7 +123,7 @@ function Snake(){
 		
 		//2.3.1当食物已经存在的时候，画面刷新时食物在原有位置重绘
 		if(this.foodList.length>0){  //长度大于0就有食物
-			var fnode = this.foodList[0];  //重绘
+			var fnode = this.foodList[k];  //重绘
 			this.ctx.drawImage(fnode.img, fnode.x*this.step, fnode.y*this.step, this.step, this.step);
 			return;
 		}
@@ -135,12 +142,22 @@ function Snake(){
 				this.drawFood();  //如果重复，则重绘
 			}else{
 				this.foodList.push({
-					x:foodX,
-					y:foodY,
-					img:foodImg
-				});   //否则，新生成一个食物
+				x: foodX,
+				y: foodY,
+				img: foodImg
+			}); //新生成一个食物
+			  this.foodList.push({
+				x: foodX,
+				y: foodY,
+				img: bgImg2
+			});//新生成一个食物
+			this.foodList.push({
+				x: foodX,
+				y: foodY,
+				img: bgImg3
+			});   //否则，新生成一个食物
 //				console.log(this.foodList);
-				var fnode = this.foodList[0];
+				var fnode = this.foodList[k];
 				this.ctx.drawImage(fnode.img, fnode.x*this.step, fnode.y*this.step, this.step, this.step);
 			}
 		
@@ -263,7 +280,13 @@ function Snake(){
 					_this.foodList = [];  //等于空数组相当于不要原来的空间，指向一个新的地址，产生垃圾
 					//_this.foodList[0] = null; //drawFood的判断条件与该语句冲突
 					//加分
-					_this.score += 10;
+					if(k==0){
+						_this.score+=10;
+					}else if(k==1){
+						_this.score+=20;
+					}else{
+						_this.score+=30;
+					}
 					//蛇身长一节
 					var lastNodeIndex = _this.snakeBodyList.length;
 					_this.snakeBodyList[lastNodeIndex] = {
@@ -315,6 +338,7 @@ function Snake(){
 		const FOOD_Y = this.foodList[0].y;  //食物纵坐标y
 		if(HEAD_X == FOOD_X && HEAD_Y == FOOD_Y){
 			this.isEaten = true;
+			k=parseInt(Math.random()*3)
 		}
 	}
 }
