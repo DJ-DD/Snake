@@ -1,13 +1,13 @@
 //1-加载游戏所用图片
 //ES6 全局变量使用const关键字定义--只读不可修改
 const northImg = new Image();
-northImg.src = "img/north.png";
+northImg.src = "img/north1.png";
 const southImg = new Image();
-southImg.src = "img/south.png";
+southImg.src = "img/south1.png";
 const eastImg = new Image();
-eastImg.src = "img/east.png";
+eastImg.src = "img/east1.png";
 const westImg = new Image();
-westImg.src = "img/west.png";
+westImg.src = "img/west1.png";
 const bodyImg = new Image();
 bodyImg.src = "img/body.png";
 const foodImg = new Image();
@@ -46,6 +46,22 @@ function Snake(){
 	this.isEaten = false;  //食物是否被吃掉标识位  true--食物被吃掉   false--食物没被吃掉
 	this.isPhone = false;  //判断设备是否为移动端 true--移动端  false--PC端
 	this.isClick = true;  //判断是否是第一次点击 true--第一次点击  false--非第一次点击
+	
+	var n=200;
+	$("#level>li:eq(0)").click(function(){
+		n=200;
+		alert("游戏难度为"+n);
+	});
+	
+	$("#level>li:eq(1)").click(function(){
+		n=100;
+		alert("游戏难度为"+n);
+	});
+	
+	$("#level>li:eq(2)").click(function(){
+		n=50;
+		alert("游戏难度为"+n);
+	});
 	
 	//保存
 	$("#save").click(function save(){  
@@ -340,7 +356,7 @@ function Snake(){
 			//3.1.3 否则重绘
 			_this.paint();  //蛇每移动一次重绘游戏画面（若背景不重绘，原来已经绘制的点仍在，蛇身会不断延长）
 			}
-		},200);
+		},n);
 		
 	}
 	/*
