@@ -12,18 +12,20 @@ const bodyImg = new Image();
 bodyImg.src = "img/body.png";
 const foodImg = new Image();
 foodImg.src = "img/food.png";
+const  foodImg2=new Image();
+foodImg2.src="img/apple.png"
+const  foodImg3=new Image();
+foodImg3.src="img/cactus.png"
 const bgImg = new Image();
-bgImg.src = "img/background.png";
+bgImg.src = "img/background1.png";
+var  k=parseInt(Math.random()*3); //设置0/1/2随机数，随机产生食物
 //将欢迎界面的图片放在最后，表示会后加载成功后，其他图片已经加载完毕，无需再进行onload判断
 const startImg = new Image();
-const  bgImg2=new Image();
-bgImg2.src="img/apple.png"
-const  bgImg3=new Image();
-bgImg3.src="img/cactus.png"
-//设置1/2/3随机数，随机产生食物
-var  k=parseInt(Math.random()*3);
-
 startImg.src = "img/start.png";
+
+$("#myul").on("click","li",function(){
+	bgImg.src = "img/background"+($(this).index()+1)+".png";
+});
 
 //创建snake类，定义其属性和方法
 function Snake(){
@@ -42,6 +44,36 @@ function Snake(){
 	this.isDead = false; //蛇是否活着标识位  true--蛇死   false--蛇活
 	this.isEaten = false;  //食物是否被吃掉标识位  true--食物被吃掉   false--食物没被吃掉
 	this.isPhone = false;  //判断设备是否为移动端 true--移动端  false--PC端
+	this.isClick = true;  //判断是否是第一次点击 true--第一次点击  false--非第一次点击
+	
+	//保存
+	$("#save").click(function save(){  
+					
+	    var siteurl = $("#ming").val();  
+	    var sitename = $("#fenshu").text();
+	    localStorage.setItem(sitename, siteurl);
+	    	alert("添加成功");
+	});
+	
+	//查找
+	 $("#paihang").click( function loadAll(){  
+        var list =$(".paihang");  
+        if(localStorage.length>0){  
+            var result = "<table border='1'>";  
+            result += "<tr><td>分数</td><td>玩家名</td></tr>";  
+            for(var i=0;i<localStorage.length;i++){  
+                var sitename = localStorage.key(i);  
+                var siteurl = localStorage.getItem(sitename);  
+                result += "<tr><td>"+sitename+"</td><td>"+siteurl+"</td></tr>";  
+            }  
+            result += "</table>";  
+            list.html(result);  
+        }else{  
+            list.html("数据为空……");  
+        }  
+    });
+	
+	
 	/*
 	 *1-生成初始化页面，点击该页面进入游戏
 	 * */
@@ -53,10 +85,13 @@ function Snake(){
 	 * 2-游戏开始，绘制背景、蛇、食物,蛇移动
 	 */
 	this.start = function(){
-		this.device();//判断设备类型
-		this.score = 0; //积分清零
-		this.paint();
-		this.move();
+		if(this.isClick){
+			this.device();//判断设备类型
+			this.score = 0; //积分清零
+			this.paint();
+			this.move();
+			this.isClick = false;
+		}
 	}
 	
 	/*
@@ -149,12 +184,12 @@ function Snake(){
 			  this.foodList.push({
 				x: foodX,
 				y: foodY,
-				img: bgImg2
+				img: foodImg2
 			});//新生成一个食物
 			this.foodList.push({
 				x: foodX,
 				y: foodY,
-				img: bgImg3
+				img: foodImg3
 			});   //否则，新生成一个食物
 //				console.log(this.foodList);
 				var fnode = this.foodList[k];
@@ -287,6 +322,9 @@ function Snake(){
 					}else{
 						_this.score+=30;
 					}
+					$("#fenshu").text(_this.score);
+					k=parseInt(Math.random()*3)
+
 					//蛇身长一节
 					var lastNodeIndex = _this.snakeBodyList.length;
 					_this.snakeBodyList[lastNodeIndex] = {
@@ -306,6 +344,7 @@ function Snake(){
 	 *4-蛇死（碰到边界或自身--dead 弹出得分界面）
 	 * */
 	this.dead = function(){
+		
 //		this.isDead = true;  //测试3.1.1，游戏一开始就死掉，可以弹框，测试逻辑
 		const LEFT_END = 0; //左边界
 		const RIGHT_END = this.stepX; //右边界
@@ -338,7 +377,6 @@ function Snake(){
 		const FOOD_Y = this.foodList[0].y;  //食物纵坐标y
 		if(HEAD_X == FOOD_X && HEAD_Y == FOOD_Y){
 			this.isEaten = true;
-			k=parseInt(Math.random()*3)
 		}
 	}
 }

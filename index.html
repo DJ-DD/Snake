@@ -4,88 +4,45 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no" />
 		<title>响应式贪吃蛇1701</title>
-		<style type="text/css">
-			*{
-				margin:0;
-				padding:0;
-				
-			}
-			#all{
-				position: relative;
-				margin-left: 10px;
-				margin-top:10px;
-			}
-			#start{
-				position: absolute;
-				top:315px;
-				left:339px;
-				width:207px;
-				height:66px;
-			}
-			#music{
-				width:50px;
-				height:50px;
-				position: absolute;
-				top:368px;
-				left:0px;
-				border-radius: 15px;
-			}
-			#set{
-				width:50px;
-				height:50px;
-				position: absolute;
-				right:0;
-				bottom: 0;
-			}
-			#btn{
-				width:893px;
-				height:418px;
-				position: absolute;
-				top:0px;
-				left: 0px;
-			}
-			#youxi{
-				position: absolute;
-				top:425px;
-				left:387px;
-			}
-			#setPara{
-				width:700px;
-				height:350px;
-				background: rgba(0,0,0,0.5);
-				position: absolute;
-				top:37px;
-				left:94px;
-				display:none;
-				color:white;
-			}
-			.close {
-				    position: absolute;
-				    top: 15px;
-				    right: 35px;
-				    color: #f1f1f1;
-				    font-size: 40px;
-				    font-weight: bold;
-				    transition: 0.3s;
-				    cursor: pointer;
-				}
-
-		</style>
+		<link rel="stylesheet" href="css/snake.css" />
 	</head>
 	<body>
 		<div id="all">
 			<canvas id="gameview" width="893" height="418"></canvas>
-			<div id="btn">
-				<img src="img/start.jpg" alt="" id="start" />
-				<img src="img/music.png" alt="" id="music" />
-				<img src="img/set.jpg" id="set"/>
-			</div>
+			<img src="img/music.png" alt="" id="music" />
+			<img src="img/set.jpg" id="set"/>
+			<img src="img/14012210279915.jpg" alt="" id="phb" />
 			<audio src="img/Blizzard Team - Reaper Of Souls.mp3" id="audio1" autoplay="autoplay"></audio>
 			<div id="setPara">
-				<div id="speed">游戏速度</div>
-				<div id="bgImg">游戏背景</div>
-				<div id="skin">蛇蛇皮肤</div>
+				<div id="speed">
+					<span>游戏难度</span>
+					<ul id="level">
+						<li>简单</li>
+						<li>中等</li>
+						<li>困难</li>
+					</ul>
+				</div>
+				<br />
+				<br />
+				<div id="bgImg">
+					<span>游戏背景</span>
+					<ul id="myul">
+						<li><img src="img/bg1-little.png" alt="" /></li>
+						<li><img src="img/bg2-little.png" alt="" /></li>
+						<!--<li><img src="img/bg3-little.png" alt="" /></li>
+						<li><img src="img/bg4-little.png" alt="" /></li>-->
+					</ul>
+				</div>
 				<span class="close">×</span>
+			</div>
+			<div id="PH-all">
+				<!--<input type="text" name="ming" id="ming" placeholder="输入玩家名" />
+				<input type="text" name="fenshu" id="fenshu" value="0" />-->
+				<div id="ming" contenteditable="true"></div>
+				<div id="fenshu">0</div>
+				<button id="save">保存</button>
+				<button id="paihang">历史记录</button>
+				<div class="paihang"></div>
 			</div>
 			<div id="intro">
 				<p style="font-weight: bold;">操作指南</p>
@@ -116,9 +73,10 @@
 				};
 				
 				//2-点击开始界面，游戏开始
-				$("#start").click(function(){
+				$("#gameview").click(function(){
 					snakegame.start();
-					$("#btn").hide();
+					$("#set").hide();
+					$("#music").hide();
 				});
 				
 				//3-音乐播放
@@ -143,6 +101,8 @@
 	 			$(".close").click(function(){
 	 				$("#setPara").css("display","none");
 	 			});
+	 			
+	 			
 
 				//1-1'直接进入游戏界面
 //				bgImg.onload = function(){

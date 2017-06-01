@@ -1,0 +1,133 @@
+*{
+	margin:0;
+	padding:0;
+	
+}
+
+#all{
+	position: relative;
+	margin-left: 10px;
+	margin-top:10px;
+}
+
+#start{
+	position: absolute;
+	top:315px;
+	left:339px;
+	width:207px;
+	height:66px;
+}
+
+#music{
+	width:50px;
+	height:50px;
+	position: absolute;
+	top:368px;
+	left:0px;
+	border-radius: 15px;
+}
+
+#set{
+	width:50px;
+	height:50px;
+	position: absolute;
+	top:368px;
+	left:843px;
+}
+
+#youxi{
+	position: absolute;
+	top:425px;
+	left:387px;
+}
+
+#setPara{
+	width:700px;
+	height:350px;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	top:37px;
+	left:94px;
+	display:none;
+	color:white;
+}
+
+.close{
+	    position: absolute;
+	    top: 15px;
+	    right: 35px;
+	    color: #f1f1f1;
+	    font-size: 40px;
+	    font-weight: bold;
+	    transition: 0.3s;
+	    cursor: pointer;
+}
+	
+#myul li{
+	list-style: none;
+	float: left;
+	cursor: pointer;
+}
+
+#level li{
+	list-style: none;
+	float:left;
+	width:100px;
+	height:30px;
+	background: red;
+	margin-right:10px;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+}
+
+#phb{
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+
+#PH-all{
+	width:200px;
+	height:418px;
+	background: red;
+	position: absolute;
+	top:0px;
+	left:893px;
+}
+
+#fenshu{
+	width:151px;
+	height:53px;
+	position: absolute;
+	top:0px;
+	left:0px;
+	background: blue;
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 53px;
+}
+
+#ming{
+	width:151px;
+	height:53px;
+	position: absolute;
+	top:60px;
+	left:0px;
+	background: blue;
+	line-height: 53px;
+	text-align: center;
+}
+
+#save{
+	position: absolute;
+	top:120px;
+	left:0px;
+}
+
+#paihang{
+	position: absolute;
+	top:180px;
+	left:0px;
+}
