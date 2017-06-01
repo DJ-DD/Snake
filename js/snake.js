@@ -268,7 +268,7 @@ function Snake(){
 				_this.isDead = false; //改变isDead状态，否则，每次开始直接死掉
 				_this.snakeBodyList = [];  //清除蛇身，便于重新开始游戏，重绘初始页面
 				//_this.start(); //游戏重新开始
-				$(_this.canvas).hide(2000);
+				//$(_this.canvas).hide(2000);
 			}else{
 				//3.1.2 false：蛇活着，判断蛇头是否与食物的坐标点一致，如果一致，清空食物数组；多个食物时可以使用标识位
 				_this.eat();  //判断食物是否被吃
