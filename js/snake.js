@@ -23,18 +23,18 @@ var  k=parseInt(Math.random()*3); //设置0/1/2随机数，随机产生食物
 const startImg = new Image();
 startImg.src = "img/start.png";
 
+//修改背景图片
 $("#myul1").on("click","li",function(){
 	bgImg.src = "img/background"+($(this).index()+1)+".png";
-	
 });
 
+//修改蛇的皮肤
 $("#myul2").on("click","li",function(){
 	bodyImg.src = "img/body"+($(this).index()+1)+".png";
 	northImg.src = "img/north"+($(this).index()+1)+".png";
 	southImg.src = "img/south"+($(this).index()+1)+".png";
 	eastImg.src = "img/east"+($(this).index()+1)+".png";
 	westImg.src = "img/west"+($(this).index()+1)+".png";
-	
 });
 
 //创建snake类，定义其属性和方法
@@ -56,6 +56,7 @@ function Snake(){
 	this.isPhone = false;  //判断设备是否为移动端 true--移动端  false--PC端
 	this.isClick = true;  //判断是否是第一次点击 true--第一次点击  false--非第一次点击
 	
+	//根据定时器的时间调节游戏的速度，分三个等级
 	var n=200;
 	$("#level>li:eq(0)").click(function(){
 		n=200;
@@ -72,26 +73,25 @@ function Snake(){
 		alert("游戏难度为"+n);
 	});
 	
-	//保存
-	$("#save").click(function save(){  
-					
-	    var sitename = $("#ming").text();  
+	//保存游戏分数
+	$("#save").click(function save(){  	
+	    var sitename = $("#ming").val();  
 	    var siteurl = $("#fenshu").text();
 	    localStorage.setItem(sitename, siteurl);
-	    	alert("添加成功");
+	   	alert("添加成功");
 	});
 	
 	//充值
 	$("#chongzhi").click(function(){
     	var money=prompt("请输入金额");
     	var sitmoney=money;
-    	var xiaoming="小明"
-    	localStorage.setItem(xiaoming, sitmoney);
+    	var sitename = $("#ming").val()+"X"; 
+    	localStorage.setItem(sitename, sitmoney);
         alert("充值成功");
     })
 	
-	//查找
-	 $("#paihang").click( function loadAll(){  
+	//查找历史记录
+	 $("#phb").click( function loadAll(){  
         var list =$(".paihang");  
         if(localStorage.length>0){  
             var result = "<table border='1'>";  
@@ -102,12 +102,11 @@ function Snake(){
                 result += "<tr><td>"+sitename+"</td><td>"+siteurl+"</td></tr>";  
             }  
             result += "</table>";  
-            list.html(result);  
+            list.html(result); 
         }else{  
             list.html("数据为空……");  
         }  
     });
-	
 	
 	/*
 	 *1-生成初始化页面，点击该页面进入游戏
@@ -333,8 +332,9 @@ function Snake(){
 			if(_this.isDead){
 				//alert你的最终分数
 				//alert("Your score is:"+_this.score);
-				$("#div")
-				
+				$("#gameover").css("display","block");//弹出gameover的div
+				$("#fen").html("Your score is :"+_this.score);//显示分数
+				_this.isClick=true;
 				//可将下面四行新建个方法restart，添加命令按钮控制重新开始
 				clearInterval(_this.timer); //如果不清除定时器，则速度会不断加快
 				_this.isDead = false; //改变isDead状态，否则，每次开始直接死掉

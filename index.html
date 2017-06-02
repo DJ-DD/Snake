@@ -9,9 +9,20 @@
 	<body>
 		<div id="all">
 			<canvas id="gameview" width="893" height="418"></canvas>
+			<div id="gameover">
+				<div id="fen">
+					
+				</div>
+				<input id="ming" placeholder="输入玩家姓名"/>
+				
+				<button id="save">保存</button>
+				<button id="zaici"></button>
+				<button id="fanhui"></button>
+			</div>
 			<img src="img/music.png" alt="" id="music" />
 			<img src="img/set.jpg" id="set"/>
 			<img src="img/14012210279915.jpg" alt="" id="phb" />
+			<div id="fenshu">0</div>
 			<audio src="img/Blizzard Team - Reaper Of Souls.mp3" id="audio1" autoplay="autoplay"></audio>
 			<div id="setPara">
 				<div id="speed">
@@ -35,6 +46,7 @@
 				</div>
 				<br />
 				<br />
+				<br />
 				<div id="bodyImg">
 					<span>蛇蛇皮肤</span>
 					<ul id="myul2">
@@ -48,12 +60,7 @@
 				<span id="xxx">x</span>
 				<!--<input type="text" name="ming" id="ming" placeholder="输入玩家名" />
 				<input type="text" name="fenshu" id="fenshu" value="0" />-->
-				<div id="ming" contenteditable="true"></div>
-				<div id="fenshu">0</div>
-				<button id="save">保存</button>
-				<button id="paihang">历史记录</button>
 				<div class="paihang"></div>
-				<button id="chongzhi">充值</button>
 			</div>
 			<div id="intro">
 				<p style="font-weight: bold;">操作指南</p>
@@ -86,9 +93,29 @@
 					snakegame.start();
 					$("#set").hide();
 					$("#music").hide();
-					$("#phb").css("opacity","0.8");
+					$("#phb").css("display","none");
+					$("#fenshu").show()
+					$("#fenshu").html("0")
 				});
 				
+				//点击重新开始
+				$("#zaici").click(function(){
+					$("#gameover").css("display","none");
+					snakegame.start();
+					$("#fenshu").show();
+					$("#fenshu").html("0")
+					
+				})
+				//返回界面
+				$("#fanhui").click(function(){
+					$("#set").show();
+					$("#music").show();
+					$("#phb").css("display","block");
+					$("#gameover").css("display","none");
+					snakegame.init();
+					$("#fenshu").hide()
+					
+				})
 				//3-音乐播放
 				var flag = true;
 	 			$("#music").click(function(){

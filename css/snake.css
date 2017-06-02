@@ -3,12 +3,60 @@
 	padding:0;
 }
 
+#gameover{
+	width: 500px;
+    height: 320px;
+    border-radius: 60px;
+    background-color: #4e3934;
+    background: url(../img/over.png) no-repeat;
+    background-size: 501px 325px;
+    position: absolute;
+    top: 57px;
+    left: 193px;
+    display: none;
+}
+
+#fen{
+	position: absolute;
+    top: 40%;
+    left: 36%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#zaici{
+	width: 137px;
+    height: 47px;
+	position: absolute;
+	top: 71%;
+	left: 58%;
+	font-size: 18px;
+	font-weight: bold;
+	background:url(../img/chongzhi.png) no-repeat;
+	background-size: 137px 47px;
+	border-radius:10px ;
+	border: none;
+}
+
+#fanhui{
+	width: 137px;
+    height: 47px;
+	position: absolute;
+	top: 71%;
+	left: 17%;
+	font-size: 18px;
+	font-weight: bold;
+	background: url(../img/fanhui.png) no-repeat;
+	background-size: 137px 47px;
+	border-radius:10px ;
+	border: none;
+}
+
 #all{
 	position: relative;
 	margin-left: 10px;
 	margin-top:10px;
 }
-
 
 #music{
 	width:50px;
@@ -63,6 +111,8 @@
 }
 	
 #myul1 li{
+	width: 21%;
+    height: 10%;
 	list-style: none;
 	float: left;
 	cursor: pointer;
@@ -79,6 +129,8 @@
 }
 
 #myul2 li{
+	width: 7%;
+    height: 10%;
 	list-style: none;
 	float: left;
 	cursor: pointer;
@@ -130,42 +182,45 @@
 }
 
 #fenshu{
-	width:151px;
-	height:53px;
-	position: absolute;
-	top:0px;
-	left:0px;
-	background: blue;
-	text-align: center;
-	font-weight: bold;
-	font-size: 30px;
-	line-height: 53px;
-	background-color: papayawhip;
-	margin-left:25px;
-	margin-top:20px;
+	width: 88px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    left: 756px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 22px;
+    margin-left: 25px;
+    margin-top: 20px;
+    display: none; 
 }
 
 #ming{
-	width:151px;
-	height:53px;
-	position: absolute;
-	top:60px;
-	left:0px;
-	background: blue;
-	line-height: 53px;
-	text-align: center;
-	background-color: papayawhip;
-	margin-left:25px;
-	margin-top:20px;
+	width: 124px;
+    height: 26px;
+    position: absolute;
+    top: 152px;
+    left: 140px;
+    background: blue;
+    line-height: 53px;
+    text-align: center;
+    background-color: papayawhip;
+    margin-left: 25px;
+    margin-top: 20px;
+    border-style:none;
 }
 
 #save{
 	position: absolute;
-	top:120px;
-	left:0px;
-	background-color: papayawhip;
-	margin-left:25px;
-	margin-top: 30px;
+    top: 142px;
+    left: 276px;
+    background-color: papayawhip;
+    margin-left: 25px;
+    margin-top: 30px;
+    width: 46px;
+    height: 26px;
+    border-style:none;
 }
 
 #paihang{
@@ -175,7 +230,7 @@
 }
 .paihang{
 	position: absolute;
-	top: 196px;
+	top: 6px;
 	left: 22px;
 }
 
@@ -216,6 +271,7 @@
 	left:139px;
 }
 
+/*PC端响应式*/
 @media screen and (max-width: 800px) {
 
    #all{
@@ -224,6 +280,38 @@
 	
 	#gameview{
 		width: 100%;
+	}
+	
+	#gameover{
+		width: 70%;
+	    height: 67%;
+	    border-radius: 15%;
+	    background-size: 100%;
+	    position: absolute;
+	    top: 16%;
+	    left: 15%;
+	}
+	
+	#zaici{
+		width: 22%;
+	    height: 24%;
+	    position: absolute;
+	    top: 74%;
+	    left: 24%;
+	    background:url(../img/chongzhi.png) no-repeat;
+	    background-size: 100%;
+	}
+	
+	#fanhui{
+		width: 22%;
+	    height: 24%;
+		position: absolute;
+		top: 74%;
+	    left: 58%;
+		background: url(../img/fanhui.png) no-repeat;
+		background-size:100%;
+		border-radius:10px ;
+		border: none;
 	}
 
 	#music{
@@ -252,14 +340,22 @@
 	#youxi{
 		position: absolute;
 		top:98%;
-		left:30%;
+		left:38%;
 		font-size:12px;
 	}
 
-	#setPara{
-		width: 365px;
-	    height: 568px;
-	    margin-left:-64px;
+	#setPara {
+	    width: 100%;
+	    height: 100%;
+	    position: absolute;
+	    top: -1%;
+	    left: 0%;
+	}
+	
+	#myul1 li img{
+		width: 100%;
+   		height: 0%;
+
 	}
 	
 	#myul1 li img:hover{
@@ -274,10 +370,10 @@
 	}
 	
 	#myul2 li img{
-		width:40px;
-		height:40px;
+		width: 66%;
+   		height: 0%;
 		opacity: 0.5;
-		display: inline-block;
+		margin-right: 0px;
 	}
 	
 	#myul2 li img:hover{
@@ -285,7 +381,9 @@
 	}
 	
 	#level li{
-		margin-right:141px;
+		width:18%;
+		height:10%;
+		margin-right:48px;
 	}
 	
 	#phb{
@@ -304,8 +402,8 @@
 	}
 	
 	#setPara span{
-	    margin-bottom: 18px;
-	    margin-left: -91px;
+	    margin-bottom: 0%;
+	    margin-left: -11%;
 	}
 	
 	#xxx{
@@ -313,12 +411,24 @@
 	}
 	
 	#ming{
-		left: 196px;
+		width: 21%;
+	    height: 11%;
+	    position: absolute;
+	    top: 48%;
+	    left: 27%;
+	}
+	
+	#save{
+		width: 10%;
+	    height: 11%;
+	    position: absolute;
+	    top: 44%;
+	    left: 51%;
 	}
 
 }
 
-/*手机端适配*/
+/*手机端响应*/
 @media screen and (max-width: 414px) {
 
    #all{
@@ -332,15 +442,19 @@
 	}
 
 	#music{
+		width:13%;
+		height:7%;
 		position: absolute;
-		top:682px;
+		top:92%;
 		left:0px;
 	}
 
 	#set{
+		width:13%;
+		height:7%;
 		position: absolute;
-		top: 682px;
-	    left: 363px;
+		top:92%;
+	    left:86%;
 	}
 
 	#intro{
@@ -350,16 +464,22 @@
 	}
 
 	#setPara{
-		width: 365px;
-	    height: 568px;
-	    margin-left:-64px;
+		width: 80%;
+	    height: 60%;
+	    margin-left: 10%;
+	    margin-top: 10%;
 	}
 	
 	#myul1 li img:hover{
 		opacity: 1;
 	}
 	
+	#myul1 li{
+		width:34%;
+	}
+	
 	#myul2 li{
+		
 		list-style: none;
 		float: left;
 		cursor: pointer;
@@ -378,24 +498,89 @@
 	}
 	
 	#level li{
-		margin-right:141px;
+		margin-right:168px;
 	}
 	
 	#phb{
 		position: absolute;
 		top:0px;
-		left:276px;
-	}
-	
-	#PH-all{
-		position: absolute;
-		top: 91px;
-	    left: 103px
+		left:74%;
+		width: 25%;
 	}
 	
 	#setPara span{
+		
 	    margin-bottom: 18px;
 	    margin-left: -91px;
+	}
+	
+	#youxi{
+		position: absolute;
+		top:100%;
+		left:40%;
+		font-size:12px;
+	}
+	
+	#gameover{
+		width: 94%;
+	    height: 23%;
+	    border-radius: 15%;
+	    background-size: 100%;
+	    position: absolute;
+	    top: 32%;
+	    left: 4%;
+	}
+	
+	#zaici{
+		width: 22%;
+	    height: 24%;
+	    position: absolute;
+	    top: 74%;
+	    left: 24%;
+	    background:url(../img/chongzhi.png) no-repeat;
+	    background-size: 100%;
+	}
+	
+	#fanhui{
+		width: 22%;
+	    height: 24%;
+		position: absolute;
+		top: 74%;
+	    left: 58%;
+		background: url(../img/fanhui.png) no-repeat;
+		background-size:100%;
+		border-radius:10px ;
+		border: none;
+	}
+	
+	#ming{
+		width: 21%;
+	    height: 11%;
+	    position: absolute;
+	    top: 48%;
+	    left: 27%;
+	}
+	
+	#save{
+		width: 10%;
+	    height: 11%;
+	    position: absolute;
+	    top: 42%;
+	    left: 51%;
+	}
+	
+	#fen{
+		position: absolute;
+	    top: 40%;
+	    left: 32%;
+	    font-size: 18px;
+	    font-weight: bold;
+	}
+	
+	#fenshu{
+		width:15%;
+		top: 1%;
+    	left: 76%;
 	}
 
 }
