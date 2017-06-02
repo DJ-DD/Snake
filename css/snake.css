@@ -234,6 +234,10 @@
 	left: 22px;
 }
 
+.chong{
+	display: none;
+}
+
 #speed{
 	margin:22px 0px 20px 110px;
 }

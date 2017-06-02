@@ -87,8 +87,14 @@ function Snake(){
     	var sitmoney=money;
     	var sitename = $("#ming").val()+"X"; 
     	localStorage.setItem(sitename, sitmoney);
+    	if(sitmoney>100){
+    		$(".chong").show()
+    	}else{
+    		$(".chong").hide()
+    	}
         alert("充值成功");
-    })
+    });
+
 	
 	//查找历史记录
 	 $("#phb").click( function loadAll(){  
