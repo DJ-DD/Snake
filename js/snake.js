@@ -332,14 +332,15 @@ function Snake(){
 			_this.dead();  //判断蛇生死
 			if(_this.isDead){
 				//alert你的最终分数
-				alert("Your score is:"+_this.score);
-				_this.start();
+				//alert("Your score is:"+_this.score);
+				$("#div")
+				
 				//可将下面四行新建个方法restart，添加命令按钮控制重新开始
 				clearInterval(_this.timer); //如果不清除定时器，则速度会不断加快
 				_this.isDead = false; //改变isDead状态，否则，每次开始直接死掉
 				_this.snakeBodyList = [];  //清除蛇身，便于重新开始游戏，重绘初始页面
 				//_this.start(); //游戏重新开始
-//				$(_this.canvas).hide(2000);
+				//$(_this.canvas).hide(2000);
 				
 			}else{
 				//3.1.2 false：蛇活着，判断蛇头是否与食物的坐标点一致，如果一致，清空食物数组；多个食物时可以使用标识位
@@ -390,7 +391,7 @@ function Snake(){
 		const headX = this.snakeBodyList[0].x;  //蛇头横坐标x
 		const headY = this.snakeBodyList[0].y;  //蛇头纵坐标y
 		//判断边界
-		if(headX < LEFT_END-1 || headY < NORTH_END-1 || headX > RIGHT_END || headY > SOUTH_END){
+		if(headX < LEFT_END|| headY < NORTH_END || headX > RIGHT_END || headY > SOUTH_END){
 			this.isDead = true;
 			return; //精简判断过程
 		}
