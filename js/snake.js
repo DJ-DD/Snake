@@ -250,21 +250,34 @@ function Snake(){
 //			console.log(_this.snakeBodyList); //打印不出来--事件处理是异步的，所以无法传递this对象
 			switch(event.keyCode){
 				case 37:  //向左
+					if(_this.snakeBodyList[0].direct=='east'){
+						break;
+					}
 					_this.snakeBodyList[0].img = westImg;
 					_this.snakeBodyList[0].direct = "west";
 				break;
 				case 38:  //向上
+					if(_this.snakeBodyList[0].direct=='south'){
+						break;
+					}
 					_this.snakeBodyList[0].img = northImg;
 					_this.snakeBodyList[0].direct = "north";
 				break;
 				case 39:  //向右
+					if(_this.snakeBodyList[0].direct=='west'){
+						break;
+					}
 					_this.snakeBodyList[0].img = eastImg;
 					_this.snakeBodyList[0].direct = "east";
 				break;
 				case 40:  //向下
+					if(_this.snakeBodyList[0].direct=='north'){
+						break;
+					}
 					_this.snakeBodyList[0].img = southImg;
 					_this.snakeBodyList[0].direct = "south";
 				break;
+
 			}
 		}
 	}
