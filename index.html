@@ -70,10 +70,10 @@
 					<img src="img/apple.png" alt="apple"  />吃到苹果加20分
 					<img src="img/cactus.png"  alt="xianrenzhang"/>吃到仙人掌加30分
 				</div>
-				<input type="button" id="zan" value="暂停" />
-				<input type="button" name="jixu" id="jixu" value="继续" />
-				<button id="chongzhi">充值</button>
 			</div>
+			<button style="display: none;" id="pause">暂停</button>
+			<button style="display: none;" id="continue">继续</button>
+			<button id="chongzhi">充值</button>
 		</div>
 		
 		<script src="js/jquery-3.2.1.min.js"></script>
@@ -92,28 +92,48 @@
 					$("#set").hide();
 					$("#music").hide();
 					$("#phb").css("display","none");
-					$("#fenshu").show()
-					$("#fenshu").html("0")
+					$("#fenshu").show();
+					$("#chongzhi").hide();
+					$("#pause").show();
+					$("#continue").show();
 				});
 				
 				//点击重新开始
 				$("#zaici").click(function(){
+					snakegame.isClick=true;
 					$("#gameover").css("display","none");
 					snakegame.start();
 					$("#fenshu").show();
-					$("#fenshu").html("0")
-					
+					$("#fenshu").html("0");
+					$("#chongzhi").hide();
+					$("#pause").show();
+					$("#continue").show();
 				})
+				
+				//暂停和继续
+				$("#pause").click(function(){
+					clearInterval(snakegame.timer);
+					
+				});
+				$("#continue").click(function(){
+					clearInterval(snakegame.timer);
+				 	snakegame.move()
+				});
+
+				
 				//返回界面
 				$("#fanhui").click(function(){
+					snakegame.isClick=true;
 					$("#set").show();
 					$("#music").show();
 					$("#phb").css("display","block");
 					$("#gameover").css("display","none");
 					snakegame.init();
-					$("#fenshu").hide()
-					
-				})
+					$("#fenshu").hide();
+					$("#chongzhi").show();
+					$("#pause").hide();
+					$("#continue").hide();
+				});
 				//3-音乐播放
 				var flag = true; //设置音乐播放暂停标识位，true--播放  false--暂停
 	 			$("#music").click(function(){

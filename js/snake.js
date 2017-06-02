@@ -57,19 +57,19 @@ function Snake(){
 	this.isClick = true;  //判断是否是第一次点击 true--第一次点击  false--非第一次点击
 	
 	//根据定时器的时间调节游戏的速度，分三个等级
-	var n=200;
+	var speed=200;
 	$("#level>li:eq(0)").click(function(){
-		n=200;
+		speed=200;
 		alert("游戏难度为"+n);
 	});
 	
 	$("#level>li:eq(1)").click(function(){
-		n=100;
+		speed=100;
 		alert("游戏难度为"+n);
 	});
 	
 	$("#level>li:eq(2)").click(function(){
-		n=50;
+		speed=50;
 		alert("游戏难度为"+n);
 	});
 	
@@ -340,7 +340,6 @@ function Snake(){
 				//alert("Your score is:"+_this.score);
 				$("#gameover").css("display","block");//弹出gameover的div
 				$("#fen").html("Your score is :"+_this.score);//显示分数
-				_this.isClick=true;
 				//可将下面四行新建个方法restart，添加命令按钮控制重新开始
 				clearInterval(_this.timer); //如果不清除定时器，则速度会不断加快
 				_this.isDead = false; //改变isDead状态，否则，每次开始直接死掉
@@ -381,7 +380,7 @@ function Snake(){
 			//3.1.3 否则重绘
 			_this.paint();  //蛇每移动一次重绘游戏画面（若背景不重绘，原来已经绘制的点仍在，蛇身会不断延长）
 			}
-		},n);
+		},speed);
 		
 	}
 	/*
